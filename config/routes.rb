@@ -1,18 +1,16 @@
 Rails.application.routes.draw do
-
-  get 'pages/dashboard'
-
+    
 	resources :posts do
-		resources :comments, only: [:create, :destroy]
+			resources :comments, only: [:create, :destroy]
 	end
-
 	devise_for :users, controllers: {
-		sessions: 'users/sessions',
-		registrations: 'users/registrations'
+			sessions: 'users/sessions',
+			registrations: 'users/registrations'
+			
 	}
-
-	resources :pages, :only [:update, :delete]
-
+	resources :pages, only: [:update, :destroy]
+	
+	get 'pages/dashboard'
 	root 'posts#index'
-# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
